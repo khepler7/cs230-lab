@@ -4,7 +4,9 @@
     <style>
         body {
             background-image: url('images/background.jpg');
-            background-size: 100% auto;
+            background-size: cover;
+            background-attachment: scroll;
+            background-repeat: no-repeat;
         }
     </style>
 
