@@ -7,14 +7,14 @@ require 'includes/dbhandler.php';
     <link rel="stylesheet" href="css/profile.css">
     <script>
     function triggered() {
-        document.querySelector("#prof-image").click();
+        document.querySelector("#gallery-image").click();
     }
 
     function preview(e) {
         if (e.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                document.querySelector('#prof-display').setAttribute('src', e.target.result);
+                document.querySelector('#gallery-display').setAttribute('src', e.target.result);
             }
             reader.readAsDataURL(e.files[0]);
         }
@@ -23,31 +23,25 @@ require 'includes/dbhandler.php';
 
     <?php
 if (isset($_SESSION['uid'])) {
-    // username after login
-    $prof_user = $_SESSION['uname'];
-    $sqlpro = "SELECT * FROM profiles WHERE uname='$prof_user'; ";
-    $res = mysqli_query($conn, $sqlpro);
-    $row = mysqli_fetch_array($res);
-    // path to user's profile pic
-    $photo = $row['profpic'];
 ?>
 
     <div class="h-50 center-me text-center">
         <div class="my-auto">
 
-            <form action="includes/upload-helper.php" method="POST" enctype="multipart/form-data">
+            <form action="includes/gallery-helper.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <img src="<?php echo $photo; ?>" alt="profile pic" onclick="triggered();" id="prof-display">
-                    <label for="prof-image" id="uname-style"><?php echo $prof_user?></label>
-                    <input type="file" name="prof-image" id="prof-image" onchange="preview(this)" class="form-control"
+                    <img src="images/icon.png" alt="profile pic" onclick="triggered();" id="gallery-display">
+                    
+                    <input type="test" name="title" class="form-control" placeholder="title">
+                    <input type="file" name="gallery-image" id="gallery-image" onchange="preview(this)" class="form-control"
                         style="display: none;">
                 </div>
                 <div class="form-group">
-                    <textarea name="bio" id="bio" cols="30" rows="10" placeholder="bio..."
+                    <textarea name="descript" id="bio" cols="30" rows="10" placeholder="Description"
                         style="text-align: center;"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" name="prof-submit"
+                    <button type="submit" name="gallery-submit"
                         class="btn btn-outline-success btn-lg btn-block">upload</button>
 
                 </div>
